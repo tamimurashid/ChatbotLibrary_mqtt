@@ -42,5 +42,12 @@ void setup(){
   lcd.init();
   lcd.backlight();
   
-
+  // === establish wifi connection ====
+  Serial.println("Connecting to wifi .....");
+  while(WiFi.status() != WL_CONNECTED){
+    Serial.println(".");
+    delay(500);
+  }
+  Serial.println("\n Wifi connected ..");
+  
 }
