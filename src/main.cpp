@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <ChatbotAPI.h>
 #include <DHT.h>
 #include <LiquidCrystal_I2C.h>
@@ -80,7 +81,7 @@ void loop(){
 
 
   // == reading data from sensor ===
-  float temperate = dht.readTemperature();
+  float temperature = dht.readTemperature();
   float humidity = dht.readHumidity();
   int smoke = digitalRead(SMOKE_PIN);
   int flame = digitalRead(FLAME_PIN);
@@ -91,7 +92,7 @@ void loop(){
     the data is properly structured for display and interpretation 
     in the chatbot interface.
   */
-  String tempStr = String(temperate ) + "°C";
+  String tempStr = String(temperature ) + "°C";
   String humStr = String(humidity) + "%";
   String smokeData = String(smoke) + "ppm";
 
@@ -110,20 +111,45 @@ void loop(){
 
   // === handle alarm tone ====
 
-  if(flameStatus = LOW){
-    digitalWrite(BUZZER_PIN, HIGH);
-    delay(500);
-    digitalWrite(BUZZER_PIN, LOW);
-    delay(500);
-  }else{
-    digitalWrite(BUZZER_PIN, LOW);
+  // Handle buzzer alarm
+  if (flame == LOW || smoke == HIGH) {
+    digitalWrite(BUZZER_PIN, HIGH);  // Alarm ON
+  } else {
+    digitalWrite(BUZZER_PIN, LOW);   // Alarm OFF
   }
-  if(smokeStatus = HIGH){
-    digitalWrite(BUZZER_PIN, HIGH);
-    delay(1000);
-    digitalWrite(BUZZER_PIN, LOW);
-    delay(1000);
-  }
+
+
+
+   // Print status to Serial Monitor
+  Serial.println("Sensor Data Sent:");
+  Serial.println("Temp: " + tempStr);
+  Serial.println("Humidity: " + humStr);
+  Serial.println("Flame: " + flameStatus);
+  Serial.println("Smoke: " + smokeStatus);
+  Serial.println("-----------------------------");
+
+  // Display on LCD
+  lcd.setCursor(0, 0);
+  lcd.print("Temp: ");
+  lcd.print(temperature, 1);
+  lcd.print(" C    ");
+
+  lcd.setCursor(0, 1);
+  lcd.print("Humidity: ");
+  lcd.print(humidity, 1);
+  lcd.print("%     ");
+
+  lcd.setCursor(0, 2);
+  lcd.print("Flame: ");
+  lcd.print(flameStatus);
+  lcd.print("    ");
+
+  lcd.setCursor(0, 3);
+  lcd.print("Smoke: ");
+  lcd.print(smokeStatus);
+  lcd.print("    ");
+
+  delay(1000);  // Update every 1 seconds
 
     
 
