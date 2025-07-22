@@ -73,3 +73,33 @@ void setup(){
   lcd.clear();
   
 }
+
+// ==== loop funtion =========
+
+void loop(){
+
+
+  // == reading data from sensor ===
+  float temperate = dht.readTemperature();
+  float humidity = dht.readHumidity();
+  int smoke = digitalRead(SMOKE_PIN);
+  int flame = digitalRead(FLAME_PIN);
+
+  /* ==== Prepare data for chatbot transmission ====
+    In this section, sensor values are formatted as strings 
+    and appended with their respective units. This ensures 
+    the data is properly structured for display and interpretation 
+    in the chatbot interface.
+  */
+  String tempStr = String(temperate ) + "°C";
+  String humStr = String(humidity) + "%";
+  String smokeData = String(smoke) + "ppm";
+
+  //======= This prepare  data with logic within it ======
+  String smokeStatus = (smoke  ==  LOW) ? "Smoke detected" : "No Smoke detected";
+  String flameStatus = (flame  ==  HIGH) ? "Smoke detected" : "No Smoke detected";
+
+      
+
+
+}
