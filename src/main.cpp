@@ -2,6 +2,7 @@
 #include <DHT.h>
 #include <LiquidCrystal_I2C.h>
 #include <Wire.h>
+#include <WiFi.h>
 
 // ===== WIFI CREDENTIAL =======
 
@@ -30,6 +31,14 @@ DHT dht(DHTPIN, DHTTYPE);
 
 //  ====== SETUP  FUNCTION =====
 void setup(){
+
+  //  serial begin for serial communication 
   Serial.begin(115200);
-  
+
+  // === initialization ====
+  WiFi.begin(ssid, password);
+  dht.begin();
+  lcd.init();
+  lcd.backlight();
+
 }
