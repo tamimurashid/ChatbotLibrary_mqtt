@@ -101,14 +101,30 @@ void loop(){
 
 
   // ==== send data to the chatbot ===
-  
+
   chatbot.updateData("V1",tempStr);
   chatbot.updateData("V2",humStr);
-  chatbot.updateData("V1",smokeData);
-  chatbot.updateData("V1",smokeStatus);
-  chatbot.updateData("V1",flameStatus);
+  chatbot.updateData("V3",smokeData);
+  chatbot.updateData("V4",smokeStatus);
+  chatbot.updateData("V5",flameStatus);
 
-      
+  // === handle alarm tone ====
 
+  if(flameStatus = LOW){
+    digitalWrite(BUZZER_PIN, HIGH);
+    delay(500);
+    digitalWrite(BUZZER_PIN, LOW);
+    delay(500);
+  }else{
+    digitalWrite(BUZZER_PIN, LOW);
+  }
+  if(smokeStatus = HIGH){
+    digitalWrite(BUZZER_PIN, HIGH);
+    delay(1000);
+    digitalWrite(BUZZER_PIN, LOW);
+    delay(1000);
+  }
+
+    
 
 }
