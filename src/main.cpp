@@ -99,6 +99,15 @@ void loop(){
   String smokeStatus = (smoke  ==  LOW) ? "Smoke detected" : "No Smoke detected";
   String flameStatus = (flame  ==  HIGH) ? "Smoke detected" : "No Smoke detected";
 
+
+  // ==== send data to the chatbot ===
+  
+  chatbot.updateData("V1",tempStr);
+  chatbot.updateData("V2",humStr);
+  chatbot.updateData("V1",smokeData);
+  chatbot.updateData("V1",smokeStatus);
+  chatbot.updateData("V1",flameStatus);
+
       
 
 
