@@ -36,9 +36,11 @@ void setup(){
   Serial.begin(115200);
 
   // === initialization ====
+  chatbot.begin(device_id, auth_token);
   WiFi.begin(ssid, password);
   dht.begin();
   lcd.init();
   lcd.backlight();
+  
 
 }
