@@ -1,18 +1,15 @@
-#include <Arduino.h>
+#include <ChatbotAPI.h>
+#include <DHT.h>
+#include <LiquidCrystal_I2C.h>
+#include <Wire.h>
 
-// put function declarations here:
-int myFunction(int, int);
+// ===== WIFI CREDENTIAL =======
 
-void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
-}
+const char* ssid = "Reindeer";
+const char* password = "200120022003";
 
-void loop() {
-  // put your main code here, to run repeatedly:
-}
+// ====== DEVICE AUTHENTICATION ===
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
-}
+
+
+ChatbotAPI chatbot;
