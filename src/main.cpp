@@ -36,18 +36,40 @@ void setup(){
   Serial.begin(115200);
 
   // === initialization ====
-  chatbot.begin(device_id, auth_token);
-  WiFi.begin(ssid, password);
+
+    //==== intialize chatbot object ==== 
+    chatbot.begin(device_id, auth_token);
+
+  //==== dht sensor initialize =====
   dht.begin();
-  lcd.init();
-  lcd.backlight();
   
+
   // === establish wifi connection ====
+  WiFi.begin(ssid, password);
   Serial.println("Connecting to wifi .....");
   while(WiFi.status() != WL_CONNECTED){
     Serial.println(".");
     delay(500);
   }
   Serial.println("\n Wifi connected ..");
+
+// === device pin setup =======
+  pinMode(FLAME_PIN, INPUT);
+  pinMode(SMOKE_PIN, INPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
+  digitalWrite(BUZZER_PIN, LOW);
+
+
+  // === lcd intialization 
+  lcd.init();
+  lcd.backlight();
+
+   // Welcome message on LCD
+  lcd.setCursor(0, 0);
+  lcd.print(" Smartfy Safety ");
+  lcd.setCursor(0, 1);
+  lcd.print("  Monitoring   ");
+  delay(2000);
+  lcd.clear();
   
 }
